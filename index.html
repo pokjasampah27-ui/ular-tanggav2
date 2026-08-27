@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="theme-color"
+    content="#7952b3"
+  >
+
+  <meta
+    name="description"
+    content="Game Ular Tangga Bahasa Indonesia - belajar sambil bermain"
+  >
+
+  <title>Ular Tangga Bahasa Indonesia</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- =====================================================
+       HALAMAN AWAL
+  ====================================================== -->
+
+  <main id="startScreen">
+
+    <div class="game-logo">
+      <span>🐍</span>
+      <span>ULAR</span>
+      <span>TANGGA</span>
+      <span>🪜</span>
+    </div>
+
+    <div class="subtitle">
+      🎓 Belajar Bahasa Indonesia sambil bermain!
+    </div>
+
+
+    <!-- KARTU PENGATURAN PERMAINAN -->
+
+    <section class="start-card">
+
+      <h2>🎮 Siap Bermain?</h2>
+
+      <p>
+        Naiki tangga, hindari ular, jawab pertanyaan,
+        dan jadilah pemain pertama yang mencapai
+        <strong>lantai 100!</strong>
+      </p>
+
+
+      <!-- JUMLAH PEMAIN -->
+
+      <label for="playerCount">
+        👥 Jumlah Pemain
+      </label>
+
+      <select id="playerCount">
+        <option value="2">2 Pemain</option>
+        <option value="3">3 Pemain</option>
+        <option value="4">4 Pemain</option>
+        <option value="5">5 Pemain</option>
+        <option value="6">6 Pemain</option>
+        <option value="7">7 Pemain</option>
+      </select>
+
+
+      <!-- NAMA PEMAIN -->
+
+      <label>
+        ✏️ Nama Pemain
+      </label>
+
+      <div id="playerInputs">
+
+        <!--
+          Diisi otomatis oleh script.js
+        -->
+
+      </div>
+
+
+      <!-- TOMBOL MULAI -->
+
+      <button
+        id="startGameBtn"
+        class="big-button"
+        type="button"
+      >
+        🚀 MULAI PERMAINAN
+      </button>
+
+
+      <div class="footer-note">
+        Maksimal 7 pemain • Ular Tangga Edukatif
+      </div>
+
+    </section>
+
+  </main>
+
+
+
+  <!-- =====================================================
+       HALAMAN PERMAINAN
+  ====================================================== -->
+
+  <main
+    id="gameScreen"
+    class="hidden"
+  >
+
+    <!-- HEADER -->
+
+    <header class="game-header">
+
+      <div>
+        <h1>
+          🐍 Ular Tangga Bahasa Indonesia 🪜
+        </h1>
+
+        <p>
+          Jawab soal, naik tangga, hindari ular!
+        </p>
+      </div>
+
+      <button
+        id="restartBtn"
+        class="small-button"
+        type="button"
+      >
+        🔄 Mulai Ulang
+      </button>
+
+    </header>
+
+
+
+    <!-- =================================================
+         LAYOUT UTAMA
+    ================================================== -->
+
+    <div class="game-layout">
+
+
+      <!-- =================================================
+           PAPAN
+      ================================================== -->
+
+      <section class="board-section">
+
+        <div
+          id="board"
+          class="board"
+        >
+
+          <!--
+            Papan 1–100 dibuat otomatis oleh script.js.
+
+            SVG digunakan untuk menggambar:
+
+            🪜 Tangga
+            🐍 Ular
+          -->
+
+          <svg
+            id="boardConnections"
+            class="board-connections"
+            viewBox="0 0 1000 1000"
+            preserveAspectRatio="none"
+            aria-hidden="true"
+          >
+
+            <!--
+              Jalur ular dan tangga
+              dibuat otomatis oleh script.js.
+            -->
+
+          </svg>
+
+
+          <!--
+            Petak 1–100 akan dibuat
+            otomatis oleh script.js.
+          -->
+
+        </div>
+
+      </section>
+
+
+
+      <!-- =================================================
+           PANEL INFORMASI
+      ================================================== -->
+
+      <aside class="side-panel">
+
+
+        <!-- PEMAIN AKTIF -->
+
+        <section class="active-player-card">
+
+          <div class="label">
+            🎯 GILIRAN SEKARANG
+          </div>
+
+          <div id="activePlayerName">
+            -
+          </div>
+
+          <div id="activePlayerInfo">
+            Siapkan dadu!
+          </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             DADU
+        ================================================== -->
+
+        <section class="dice-card">
+
+          <div
+            id="dice"
+            class="dice"
+            aria-label="Dadu"
+          >
+            🎲
+          </div>
+
+          <button
+            id="rollDiceBtn"
+            class="roll-button"
+            type="button"
+          >
+            🎲 LEMPAR DADU
+          </button>
+
+        </section>
+
+
+
+        <!-- =================================================
+             DAFTAR PEMAIN
+        ================================================== -->
+
+        <section class="players-card">
+
+          <h3>
+            👥 Pemain
+          </h3>
+
+          <div id="playersList">
+
+            <!--
+              Diisi otomatis oleh script.js
+            -->
+
+          </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             LOG PERMAINAN
+        ================================================== -->
+
+        <section class="log-card">
+
+          <h3>
+            📜 Catatan Permainan
+          </h3>
+
+          <div id="gameLog">
+
+            <div class="log-entry">
+              🎮 Permainan siap dimulai!
+            </div>
+
+          </div>
+
+        </section>
+
+      </aside>
+
+    </div>
+
+  </main>
+
+
+
+  <!-- =====================================================
+       MODAL SOAL
+  ====================================================== -->
+
+  <div
+    id="questionModal"
+    class="modal hidden"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="questionTitle"
+  >
+
+    <div class="modal-card question-card">
+
+      <div
+        id="questionIcon"
+        class="modal-icon"
+      >
+        🧠
+      </div>
+
+      <h2 id="questionTitle">
+        Tantangan Bahasa Indonesia
+      </h2>
+
+      <p id="questionDescription">
+        Jawab pertanyaan berikut dengan benar!
+      </p>
+
+
+      <!-- PERTANYAAN -->
+
+      <div id="questionText">
+        Pertanyaan akan muncul di sini.
+      </div>
+
+
+      <!-- PILIHAN JAWABAN -->
+
+      <div id="questionOptions">
+
+        <!--
+          A
+          B
+          C
+          D
+
+          dibuat otomatis oleh script.js
+        -->
+
+      </div>
+
+
+      <!-- HASIL JAWABAN -->
+
+      <div id="questionResult"></div>
+
+
+      <!-- TOMBOL LANJUT -->
+
+      <button
+        id="questionContinueBtn"
+        class="big-button hidden"
+        type="button"
+      >
+        ➡️ LANJUT
+      </button>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- =====================================================
+       MODAL TANTANGAN LUCU
+  ====================================================== -->
+
+  <div
+    id="funModal"
+    class="modal hidden"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="funTitle"
+  >
+
+    <div class="modal-card fun-card">
+
+      <div
+        id="funIcon"
+        class="modal-icon"
+      >
+        😂
+      </div>
+
+      <h2 id="funTitle">
+        TANTANGAN LUCU!
+      </h2>
+
+      <div id="funText">
+        Bersiap melakukan tantangan!
+      </div>
+
+
+      <button
+        id="funDoneBtn"
+        class="big-button"
+        type="button"
+      >
+        😎 SUDAH!
+      </button>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- =====================================================
+       MODAL HASIL TABRAKAN
+  ====================================================== -->
+
+  <div
+    id="collisionModal"
+    class="modal hidden"
+    role="dialog"
+    aria-modal="true"
+  >
+
+    <div class="modal-card">
+
+      <div class="modal-icon">
+        💥
+      </div>
+
+      <h2>
+        Aduh! Bertabrakan!
+      </h2>
+
+      <p id="collisionText">
+        Kamu menginjak pion pemain lain.
+      </p>
+
+      <button
+        id="collisionContinueBtn"
+        class="big-button"
+        type="button"
+      >
+        😵 MUNDUR 3 LANGKAH
+      </button>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- =====================================================
+       MODAL BINTANG
+  ====================================================== -->
+
+  <div
+    id="starModal"
+    class="modal hidden"
+    role="dialog"
+    aria-modal="true"
+  >
+
+    <div class="modal-card">
+
+      <div class="modal-icon">
+        ⭐
+      </div>
+
+      <h2>
+        PETAK AMAN!
+      </h2>
+
+      <p id="starText">
+        Kamu berada di bawah perlindungan bintang.
+      </p>
+
+      <button
+        id="starContinueBtn"
+        class="big-button"
+        type="button"
+      >
+        ⭐ LANJUT
+      </button>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- =====================================================
+       MODAL MENANG
+  ====================================================== -->
+
+  <div
+    id="winnerModal"
+    class="modal hidden"
+    role="dialog"
+    aria-modal="true"
+  >
+
+    <div class="modal-card winner-card">
+
+      <div class="winner-animation">
+        🏆🎉🏆
+      </div>
+
+      <h1>
+        SELAMAT!
+      </h1>
+
+      <div id="winnerName">
+        -
+      </div>
+
+      <p>
+        🎊 Kamu berhasil mencapai
+        <strong>LANTAI 100!</strong>
+      </p>
+
+      <div class="winner-confetti">
+        🎉 🎊 ⭐ 🎈 🥳 ⭐ 🎊 🎉
+      </div>
+
+      <button
+        id="playAgainBtn"
+        class="big-button"
+        type="button"
+      >
+        🔄 MAIN LAGI
+      </button>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- =====================================================
+       AUDIO
+       Tidak membutuhkan file suara eksternal.
+       script.js akan membuat suara menggunakan Web Audio API.
+  ====================================================== -->
+
+  <audio
+    id="dummyAudio"
+    preload="none"
+  ></audio>
+
+
+
+  <!-- =====================================================
+       JAVASCRIPT
+  ====================================================== -->
+
+  <script src="script.js"></script>
+
+</body>
+</html>
